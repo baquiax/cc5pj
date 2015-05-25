@@ -11,7 +11,7 @@ USE `cc5` ;
 CREATE TABLE IF NOT EXISTS `cc5`.`role` (
   `idrole` INT NOT NULL AUTO_INCREMENT,
   `description` VARCHAR(45) NULL,
-  `unix_perms` INT NULL DEFAULT 4,
+  `unix_perms` INT NULL DEFAULT 7,
   PRIMARY KEY (`idrole`))
 ENGINE = InnoDB;
 
@@ -43,6 +43,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `cc5`.`country` (
   `idcountry` INT NOT NULL AUTO_INCREMENT,
   `country` VARCHAR(200) NOT NULL,
+  `code` VARCHAR(4) NOT NULL,
   PRIMARY KEY (`idcountry`))
 ENGINE = InnoDB;
 
@@ -77,7 +78,6 @@ CREATE TABLE IF NOT EXISTS `cc5`.`team` (
   `name` VARCHAR(200) NULL,
   `fundation_date` DATE NULL,
   `logo` VARCHAR(100) NULL,
-  `teamcol` VARCHAR(45) NULL,
   PRIMARY KEY (`idteam`))
 ENGINE = InnoDB;
 
