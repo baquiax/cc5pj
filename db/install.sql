@@ -75,11 +75,17 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `cc5`.`team` (
   `idteam` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(200) NULL,
-  `fundation_date` DATE NULL,
+  `name` VARCHAR(200) NOT NULL,
+  `fundation_date` DATE NOT NULL,
   `logo` VARCHAR(100) NULL,
-  `teamcol` VARCHAR(45) NULL,
-  PRIMARY KEY (`idteam`))
+  `idcountry` INT NOT NULL,
+  PRIMARY KEY (`idteam`),
+  INDEX `fk_team_country1_idx` (`idcountry` ASC),
+  CONSTRAINT `fk_team_country1`
+    FOREIGN KEY (`idcountry`)
+    REFERENCES `cc5`.`country` (`idcountry`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 

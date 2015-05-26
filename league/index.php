@@ -39,9 +39,9 @@
 				</a>        
             </div>
 
-            <form class="navbar-form navbar-right" role="search">
+            <form class="navbar-form navbar-right" role="search" method="POST">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search">
+                    <input type="text" class="form-control" placeholder="Buscar" name="search" value="<?php echo $_POST['search']?>">
                 </div>
                 <button type="submit" class="btn btn-default">Filtrar</button>
             </form>          
@@ -54,14 +54,20 @@
 		<th>ID</th>
 		<th>Liga</th>
 		<th>Pais</th>
-		<th></th>
+		<th>Logo</th>
 
 		<!-- ADMIN AREA -->
 		<th colspan="2" class="text-center">MAS ACCIONES</th>			
 	</tr>
 	<?php
 		$league = new League;
-		foreach ($league->getAllLeagues() as $l) {
+		if(!empty($_POST["search"])) {
+			$leagues = $league->filterLeaguesByName($_POST["search"]);
+		} else {
+			$leagues = $league->getAllLeagues();
+		}
+
+		foreach ($leagues as $l) {
 			$row = "<tr><td>".$l["idleague"]."</td><td>".$l["name"]."</td>"."<td><img width='64' src='/cc5pj/img/flags/". 
 			strtolower($l["code"]).".svg'></td>"."<td><img width='64' src='/cc5pj/img/u/". $l["photo"]."'></td>";
 			

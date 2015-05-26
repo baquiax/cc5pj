@@ -14,6 +14,13 @@ class League {
 		return $connection->doQuery($queryString, $parameters);
 	}
 
+	function filterLeaguesByName($name) {
+		$connection = new Connection;
+		$queryString = "select l.*,c.code from league l, country c where l.idcountry = c.idcountry and l.name like ?";
+		$parameters = array( array("value" => "%".$name."%"));
+		return $connection->doQuery($queryString, $parameters);
+	}
+
 	function editLeague($id, $n = "", $ic = 0, $p ="") {
 		if(empty($id)) return false;
 		$connection = new Connection;

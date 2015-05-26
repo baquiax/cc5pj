@@ -1,5 +1,8 @@
 <?php
-	include_once("League.php");
+include_once("League.php");
+
+$imageName = "";
+if(!empty($_FILES["photo"]["name"])) {
 	$imgDir = dirname(__FILE__)."/../../img/u/";
 	$imageName = "img-".round(microtime(true) * 1000);
 	$imageRealPath = $imgDir . basename($imageName);
@@ -18,13 +21,18 @@
 		move_uploaded_file($_FILES["photo"]["tmp_name"], $imageRealPath);
 	} else {
 		$imageName = "";
-	}
+	}	
+}
 
-	$league = new League;
-	$n = (!empty($_POST['name'])) ? $_POST['name'] : "";
-	$idCountry = (!empty($_POST['idcountry'])) ? $_POST['idcountry'] : "";    
-	$league->newLeague($n, $idCountry, $imageName);
-	
-	$url = (!empty($_POST['url'])) ? $_POST['url'] : "";
-	header("Location: /cc5pj/notifications/done.php?url=".$url);
+$league = new League;
+$id = (!empty($_POST['idleague'])) ? $_POST['idleague'] : "";
+$n = (!empty($_POST['name'])) ? $_POST['name'] : "";
+$idCountry = (!empty($_POST['idcountry'])) ? $_POST['idcountry'] : "";
+$ephoto = (!empty($_POST['ephoto'])) ? $_POST['ephoto'] : "";
+$imageName = (!empty($imageName)) ? $imageName : $ephoto;
+
+$league->editLeague($id, $n, $idCountry, $imageName);
+
+$url = (!empty($_POST['url'])) ? $_POST['url'] : "";
+header("Location: /cc5pj/notifications/done.php?url=".$url);
 ?>

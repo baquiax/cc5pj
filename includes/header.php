@@ -83,8 +83,8 @@
 			        	<?php
 			        		if(empty($level)) {
 			        	?>								
-								<li class="list-group-item"><a href="/cc5pj/league">Ligas</a></li>
-								<li class="list-group-item"><a>Ultimos Resultados</a></li>
+								<li class="list-group-item"><a href="/cc5pj/league">Todas las Ligas</a></li>
+								<li class="list-group-item"><a href="/cc5pj/teams">Equipos Inscritos</a></li>								
 						<?php
 			        		} else if($level = "tournament") {
 			        	?>

@@ -1,5 +1,5 @@
 <?php
-	include_once("League.php");
+	include_once("Team.php");
 	$imgDir = dirname(__FILE__)."/../../img/u/";
 	$imageName = "img-".round(microtime(true) * 1000);
 	$imageRealPath = $imgDir . basename($imageName);
@@ -20,11 +20,12 @@
 		$imageName = "";
 	}
 
-	$league = new League;
+	$team = new Team;
 	$n = (!empty($_POST['name'])) ? $_POST['name'] : "";
-	$idCountry = (!empty($_POST['idcountry'])) ? $_POST['idcountry'] : "";    
-	$league->newLeague($n, $idCountry, $imageName);
-	
+	$f = (!empty($_POST['fundation_date'])) ? $_POST['fundation_date'] : "";
+	$ic = (!empty($_POST['idcountry'])) ? $_POST['idcountry'] : "";
+	$team->newTeam($n, $f, $ic, $imageName);
+
 	$url = (!empty($_POST['url'])) ? $_POST['url'] : "";
 	header("Location: /cc5pj/notifications/done.php?url=".$url);
 ?>
