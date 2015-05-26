@@ -1,8 +1,8 @@
 <?php
 $level = "tournament";
-include("../includes/header.php");
-include(dirname(__FILE__)."/../controller/league/League.php");
-include(dirname(__FILE__)."/../controller/tournament/Phase.php");
+include_once("../includes/header.php");
+include_once(dirname(__FILE__)."/../controller/league/League.php");
+include_once(dirname(__FILE__)."/../controller/tournament/Phase.php");
 ?>
 
 <div class="panel panel-default">
@@ -10,16 +10,17 @@ include(dirname(__FILE__)."/../controller/tournament/Phase.php");
         <h3 class="panel-title">Creacion de torneo.</h3>
     </div>
     <div class="panel-body">
-        <form action="/cc5pj/controller/player/new-player.php" method="post"  data-toggle="validator">
+        <form action="/cc5pj/controller/tournament/new-tournament.php" method="post"  data-toggle="validator">
             <input type="hidden" name="url" value="/cc5pj/tournament">
+
             <div class="form-group">
                 <label for="idleague">Liga</label>
                 <input required type="hidden" id="hidden-idleague" name="idleague">
-                <select id="idleague" class="form-control" >                    
+                <select id="idleague" class="form-control" >
                     <?php
                         $league = new League;
-                        foreach ($league->getAllLeagues() as $l) {
-                            echo "<option data-description='--' value='".$l["idleague"]."' data-imagesrc='/cc5pj/img/u/".strtolower($l["photo"])."'>".$l["name"]."</option>";
+                        foreach ($league->filterLeaguesById($_SESSION["idleague"]) as $l) {
+                            echo "<option data-description='-------' value='".$l["idleague"]."' data-imagesrc='/cc5pj/img/u/".strtolower($l["photo"])."'>".$l["name"]."</option>";
                         }
                     ?>
                 </select>
@@ -33,8 +34,7 @@ include(dirname(__FILE__)."/../controller/tournament/Phase.php");
                             jQuery("#hidden-idleague").attr("value", data.selectedData.value);             
                         }    
                       });
-                </script>
-                <span id="helpBlock" class="help-block">Elije la liga a la que pertenece este torneo.</span>
+                </script>                
             </div>
             <div class="form-group">
                 <label for="name">Nombre</label>

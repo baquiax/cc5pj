@@ -1,8 +1,8 @@
 <?php  
 	session_start();	
 	include_once(dirname(__FILE__)."/../controller/league/League.php");
-	if(empty($title)) $title = "FUT";
-	if(empty($subtitle)) $subtitle = "info";
+	if(empty($title)) $title = "Fut ";
+	if(empty($subtitle)) $subtitle = "";
 ?>
 <!DOCTYPE html>
 <html>
@@ -97,7 +97,6 @@
 			        		else
 			        			echo "Liga";
 			        	?>
-
         			</h4>
       			</div>
       			<div id="menu" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="menu" aria-expanded="true">
@@ -111,7 +110,8 @@
 						<?php
 			        		} else if($level = "tournament") {
 			        	?>
-				        		<li class="list-group-item"><a href="/cc5pj/teams">Equipos</a></li>
+			        			<li class="list-group-item"><a href="/cc5pj/tournament">Torneos</a></li>
+				        		<li class="list-group-item"><a href="/cc5pj/tournament/teams">Equipos</a></li>
 				        		<li class="list-group-item"><a href="/cc5pj/tournament/phases">Fases</a></li>
 								<li class="list-group-item"><a href="/cc5pj/player">Jugadores</a></li>								
 			        	<?php

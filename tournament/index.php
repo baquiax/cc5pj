@@ -1,7 +1,9 @@
 <?php
 	session_start();
 	$level = "tournament";
-	$_SESSION["idleague"] = $_POST["idleague"];	
+	if (!empty($_POST["idleague"]))
+		$_SESSION["idleague"] = $_POST["idleague"];
+
 	include_once("../includes/header.php");
 	include_once(dirname(__FILE__)."/../controller/tournament/Tournament.php");
 ?>
@@ -32,12 +34,35 @@
 <table class="table table-striped">
 	<tr>
 		<th>ID</th>
-		<th>Liga</th>
+		<th>name</th>
+		<th>Limite de equipos</th>
+		<th>Fases contempladas</th>
+		<th>Inicia</th>
+		<th>Concluye</th>
+
+		<th colspan="2" class="text-center">MAS ACCIONES</th>			
 	</tr>
 	<?php
-		$phase = new Phase;
-		foreach ($phase->getAllPhases() as $phase) {
-			echo "<tr><td>".$phase["idphase"]."</td><td>".$phase["phase"]."</td></tr>";
+		$tournament = new Tournament;
+		foreach ($tournament->getAllTournaments() as $t) {
+			$row = "<tr>";
+			$row .= "<td>".$t["idtournament"]."</td>";
+			$row .= "<td>".$t["name"]."</td>";
+			$row .= "<td>".$t["teams"]."</td>";
+			$row .= "<td>".$t["phases"]."</td>";
+			$row .= "<td>".$t["start"]."</td>";
+			$row .= "<td>".$t["end"]."</td>";
+
+			$row .= "<td class='text-center'><a href='javascript:edit(".$l["idleague"].")' class='btn btn-warning'>
+						<span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>
+					</a></td>";
+
+			$row .= "<td class='text-center'><a href='javascript:remove(".$l["idleague"].")' class='btn btn-danger'>
+						<span class='glyphicon glyphicon-minus' aria-hidden='true'></span>
+					</a></td>";
+
+			$row .= "</tr>";
+			echo $row;
 		}
 	?>
 </table>
