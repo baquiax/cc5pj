@@ -1,5 +1,5 @@
 <?php
-include( dirname(__FILE__)."/../../db/connection.php");
+include_once( dirname(__FILE__)."/../../db/connection.php");
 class Country {
 
 	var $connection;

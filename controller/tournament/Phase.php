@@ -1,5 +1,5 @@
 <?php
-include( dirname(__FILE__)."/../../db/connection.php");
+include_once( dirname(__FILE__)."/../../db/connection.php");
 class Phase {
 	function getAllPhases() {
 		$connection = new Connection;
@@ -11,7 +11,7 @@ class Phase {
 		$connection = new Connection;
 		$queryString = "insert into phase (phase) values (?)";
 		$parameters = array(array("value" => $phase));
-		return $connection->execute($queryString, $paxsrameters);
+		return $connection->execute($queryString, $parameters);
 	}
 }
 ?>

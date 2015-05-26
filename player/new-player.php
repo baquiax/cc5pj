@@ -5,6 +5,7 @@
 ?>
 
 <form action="/cc5pj/controller/player/new-player.php" method="post" enctype="multipart/form-data">
+  <input type="hidden" name="url" value="/cc5pj/player"> 
 	<div class="form-group">
     	<label for="firstname">Nombres</label>
     	<input type="text" class="form-control" id="firstname" name="firstname" placeholder="Nombres">

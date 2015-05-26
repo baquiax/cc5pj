@@ -9,15 +9,13 @@
 	<script type="text/javascript" src="/cc5pj/bootstrap/jquery-2.1.3.min.js"></script>
 	<script type="text/javascript" src="/cc5pj/bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="/cc5pj/js/jquery.ddslick.min.js"></script>
+	<script type="text/javascript" src="/cc5pj/js/validator.js"></script>
 	<link rel="stylesheet" href="/cc5pj/bootstrap/css/bootstrap.min.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style type="text/css">
 		html,body {
-		  height: 100%;
+			height: 100%;
 		}
-		/*
-		 *		Simple footer hack.
-		 */
 		.footer {			
 			height: 60px;
 			background-color: #f5f5f5;
@@ -40,9 +38,13 @@
 		.dd-option-image {
 			width: 32px !important;
 		}
+
+		.dd-select {
+			min-height: 32px;
+		}
 	</style>
 </head>
-<body>
+.<body> 
 <header class="page-header">
   <h1><?php echo $title;?><small><?php echo $subtitle;?></small></h1>
 </header>
@@ -78,13 +80,41 @@
       			</div>
       			<div id="menu" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="menu" aria-expanded="true">
 			        <ul class="list-group">
-						<li class="list-group-item"><a>Usuarios</a></li>
-						<li class="list-group-item"><a href="/cc5pj/tournament">Torneos</a></li>
-						<li class="list-group-item"><a>Resultados</a></li>
+			        	<?php
+			        		if(empty($level)) {
+			        	?>								
+								<li class="list-group-item"><a href="/cc5pj/league">Ligas</a></li>
+								<li class="list-group-item"><a>Ultimos Resultados</a></li>
+						<?php
+			        		} else if($level = "tournament") {
+			        	?>
+				        		<li class="list-group-item"><a href="/cc5pj/teams">Equipos</a></li>
+				        		<li class="list-group-item"><a href="/cc5pj/tournament/phases">Fases</a></li>
+								<li class="list-group-item"><a href="/cc5pj/player">Jugadores</a></li>								
+			        	<?php
+			        		}
+			        	?>
 					</ul>
       			</div>
     		</div>
-  		</div>	  	
+  		</div>
+  		<br/><br/>
+  		<div class="panel-group" role="tablist">
+			<div class="panel panel-default">
+      			<div class="panel-heading" role="tab" id="menu-header">
+        			<h4 class="panel-title" id="-collapsible-list-group-">
+            			Administracion de Usuarios       				
+        			</h4>
+      			</div>
+      			<div id="menu" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="menu" aria-expanded="true">
+			        <ul class="list-group">
+		        		<li class="list-group-item"><a href="/cc5pj/teams">Usuarios</a></li>
+		        		<li class="list-group-item"><a href="/cc5pj/tournament/phases">Roles</a></li>
+					</ul>
+      			</div>
+    		</div>
+  		</div>	 
+
   	</div>
 
   	<div class="col-md-9">

@@ -70,7 +70,6 @@ class Connection {
 	}
 
 	function execute($queryString, $parameters = array()) {
-		var_dump($parameters);
 		$mysql = $this->getConnection();
 		$statement = $mysql->prepare($queryString);
 		if ($statement === FALSE) {

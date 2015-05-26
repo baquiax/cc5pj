@@ -78,6 +78,7 @@ CREATE TABLE IF NOT EXISTS `cc5`.`team` (
   `name` VARCHAR(200) NULL,
   `fundation_date` DATE NULL,
   `logo` VARCHAR(100) NULL,
+  `teamcol` VARCHAR(45) NULL,
   PRIMARY KEY (`idteam`))
 ENGINE = InnoDB;
 
@@ -201,6 +202,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `cc5`.`tournament` (
   `idtournament` INT NOT NULL AUTO_INCREMENT,
   `idleague` INT NULL,
+  `name` VARCHAR(200) NULL,
   `teams` INT NULL,
   `phases` INT NULL,
   `start` DATE NULL,
