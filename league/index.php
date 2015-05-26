@@ -1,7 +1,12 @@
 <?php
-	include("../includes/header.php");
-	include(dirname(__FILE__)."/../controller/league/League.php");
+	include_once("../includes/header.php");
+	include_once(dirname(__FILE__)."/../controller/league/League.php");
 ?>
+
+
+<form id="tournaments" method="POST" action="/cc5pj/tournament/">
+	<input type="hidden" name="idleague" value="">
+</form>
 
 <form id="edit" method="POST" action="edit-league.php">
 	<input type="hidden" name="idleague" value="">
@@ -15,6 +20,11 @@
 	function edit(identifier) {
 		jQuery("#edit input").first().val(identifier);
 		jQuery("#edit").submit();
+	}
+
+	function openLeague(identifier) {
+		jQuery("#tournaments input").first().val(identifier);
+		jQuery("#tournaments").submit();
 	}
 
 	function remove(identifier){
@@ -41,7 +51,7 @@
 
             <form class="navbar-form navbar-right" role="search" method="POST">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Buscar" name="search" value="<?php echo $_POST['search']?>">
+                    <input type="text" class="form-control" placeholder="Buscar" name="search" value="<?php if (empty($_POST['search'])) { echo $_POST['search']; }?>">
                 </div>
                 <button type="submit" class="btn btn-default">Filtrar</button>
             </form>          
@@ -68,7 +78,11 @@
 		}
 
 		foreach ($leagues as $l) {
-			$row = "<tr><td>".$l["idleague"]."</td><td>".$l["name"]."</td>"."<td><img width='64' src='/cc5pj/img/flags/". 
+			$row = "<tr><td>".$l["idleague"]."</td>";
+
+			$row .= "<td><a href='javascript:openLeague(".$l["idleague"].")'>".$l["name"]."</a></td>";
+			
+			$row .= "<td><img width='64' src='/cc5pj/img/flags/". 
 			strtolower($l["code"]).".svg'></td>"."<td><img width='64' src='/cc5pj/img/u/". $l["photo"]."'></td>";
 			
 			$row .= "<td class='text-center'><a href='javascript:edit(".$l["idleague"].")' class='btn btn-warning'>

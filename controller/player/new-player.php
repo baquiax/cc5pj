@@ -15,17 +15,8 @@
 		$uploadOk = ($check !== false) ? 1 : 0; 
 	}
 
-	if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-		&& $imageFileType != "gif" ) {    
-		$uploadOk = 0;
-	}
-
 	if ($uploadOk == 1) {
-		if (move_uploaded_file($_FILES["photo"]["tmp_name"], $imageRealPath)) {
-		    	
-		} else {
-		        //Error!!!!
-		}
+		move_uploaded_file($_FILES["photo"]["tmp_name"], $imageRealPath);
 	} else {
 		$imageName = "";
 	}
@@ -39,6 +30,6 @@
 	$idCountry = $_POST['idcountry'];    
 	$player->newPlayer($fn, $ln, $b, $h, $w, $idCountry, $imageName);
 
-	$returnUrl = (!empty($_POST['url'])) ? $_POST['url'] : "";
-	header('Location: '.$returnUrl);
+	$url = (!empty($_POST['url'])) ? $_POST['url'] : "";
+	header("Location: /cc5pj/notifications/done.php?url=".$url);
 ?>

@@ -1,4 +1,6 @@
 <?php  
+	session_start();	
+	include_once(dirname(__FILE__)."/../controller/league/League.php");
 	if(empty($title)) $title = "FUT";
 	if(empty($subtitle)) $subtitle = "info";
 ?>
@@ -46,12 +48,26 @@
 </head>
 .<body> 
 <header class="page-header">
-  <h1><?php echo $title;?><small><?php echo $subtitle;?></small></h1>
+	<?php				
+		if (isset($_SESSION["idleague"]) && $level == "tournament") {
+			$league = new League;
+			foreach ($league->filterLeaguesById($_SESSION["idleague"]) as $l) {
+		    	$_idleague = $l["idleague"];
+		    	$subtitle = $l["name"];
+		    	$_country = $l["code"];
+		    	$_photo = $l["photo"];
+			}
+			//echo "<img class='img-responsive btn-default navbar-btn' width='64' src='/cc5pj/img/u/". $_photo ."'>";
+
+		}				
+	?>
+  	<h1><?php echo $title;?><small><?php echo $subtitle;?></small></h1>
+  	
 </header>
 <nav class="navbar navbar-default">
 	<div class="container-fluid">
-	    <div class="navbar-header">			
-			<a class="navbar-brand" href="/cc5pj">Inicio</a>
+	    <div class="navbar-header">				
+			<a class="navbar-brand" href="/cc5pj">Inicio</a>			
 		</div>
 		<ul class="nav navbar-nav navbar-right">
 		    <li class="dropdown">
@@ -75,7 +91,13 @@
 			<div class="panel panel-default">
       			<div class="panel-heading" role="tab" id="menu-header">
         			<h4 class="panel-title" id="-collapsible-list-group-">
-            			Menu principal        				
+        				<?php
+			        		if(empty($level))
+			       				echo "Menu principal";
+			        		else
+			        			echo "Liga";
+			        	?>
+
         			</h4>
       			</div>
       			<div id="menu" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="menu" aria-expanded="true">
@@ -84,7 +106,8 @@
 			        		if(empty($level)) {
 			        	?>								
 								<li class="list-group-item"><a href="/cc5pj/league">Todas las Ligas</a></li>
-								<li class="list-group-item"><a href="/cc5pj/teams">Equipos Inscritos</a></li>								
+								<li class="list-group-item"><a href="/cc5pj/teams">Equipos Inscritos</a></li>
+								<li class="list-group-item"><a href="/cc5pj/player">Jugadores Inscritos</a></li>
 						<?php
 			        		} else if($level = "tournament") {
 			        	?>

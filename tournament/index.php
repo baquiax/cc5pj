@@ -1,7 +1,9 @@
 <?php
+	session_start();
 	$level = "tournament";
-	include("../includes/header.php");
-	include(dirname(__FILE__)."/../controller/tournament/Tournament.php");
+	$_SESSION["idleague"] = $_POST["idleague"];	
+	include_once("../includes/header.php");
+	include_once(dirname(__FILE__)."/../controller/tournament/Tournament.php");
 ?>
 
 <nav class="navbar navbar-default">
@@ -10,8 +12,7 @@
             <span class="navbar-brand">Administrar</span>
         </div>
         
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">            
             <div class="nav navbar-nav navbar-left">
             	<a href="new-tournament.php" class="btn btn-default navbar-btn btn-success">
 					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;&nbsp;CREAR TORNEO
