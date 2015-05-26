@@ -8,6 +8,27 @@
 	include_once(dirname(__FILE__)."/../controller/tournament/Tournament.php");
 ?>
 
+<form id="edit" method="POST" action="edit-tournament.php">
+	<input type="hidden" name="idteam" value="">
+</form>
+
+<form id="delete" method="POST" action="/cc5pj/controller/tournament/delete-tournament.php">
+	<input type="hidden" name="idteam" value="">
+	<input type="hidden" name="url" value="/cc5pj/tournament">
+</form>
+<script type="text/javascript">
+	function edit(identifier) {
+		jQuery("#edit input").first().val(identifier);
+		jQuery("#edit").submit();
+	}
+	function remove(identifier){
+		if(confirm("Esta seguro de eliminar este elemento?")){
+			jQuery("#delete input").first().val(identifier);
+			jQuery("#delete").submit();		
+		}
+	}
+</script>
+
 <nav class="navbar navbar-default">
     <div class="container-fluid">        
         <div class="navbar-header">
@@ -53,11 +74,11 @@
 			$row .= "<td>".$t["start"]."</td>";
 			$row .= "<td>".$t["end"]."</td>";
 
-			$row .= "<td class='text-center'><a href='javascript:edit(".$l["idleague"].")' class='btn btn-warning'>
+			$row .= "<td class='text-center'><a href='javascript:edit(".$l["idtournament"].")' class='btn btn-warning'>
 						<span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>
 					</a></td>";
 
-			$row .= "<td class='text-center'><a href='javascript:remove(".$l["idleague"].")' class='btn btn-danger'>
+			$row .= "<td class='text-center'><a href='javascript:remove(".$l["idtournament"].")' class='btn btn-danger'>
 						<span class='glyphicon glyphicon-minus' aria-hidden='true'></span>
 					</a></td>";
 
