@@ -1,4 +1,4 @@
 #!/bin/bash
 sudo chgrp -R www-data *
-sudo chown -R baquiax *
+sudo chown -R root *
 sudo chmod -R 775 * 
